@@ -1,0 +1,21 @@
+﻿{
+ "manifest_version": 2,
+ "name": "Mistakes tracker",
+ "description": "The most popular movies and TV shows in your   default tab. Includes ratings, summaries and the ability to watch trailers.",
+ "version": "1",
+ "author": "Jake Prins",
+ "browser_action": {
+   //"default_icon": "tab-icon.png",
+   "default_popup": "popup.html",
+   "default_title": "Moderate like a beast"
+ },
+ "background": {
+        "scripts": [
+            "js/events.js"
+        ],
+        "persistent": false
+  }
+
+
+ "permissions": ["activeTab"]
+}
