@@ -1,9 +1,11 @@
 ﻿{
  "manifest_version": 2,
  "name": "Mistakes tracker",
- "description": "The most popular movies and TV shows in your   default tab. Includes ratings, summaries and the ability to watch trailers.",
+ "description": "Helps to track mistakes immidiately after you clicked submit",
  "version": "1",
  "author": "Danylo Soloviov",
+ "minimum_chrome_version": "46",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com/ga.js https://example.cc; object-src 'self'",
  "browser_action": {
    "default_popup": "popup.html",
    "default_title": "Moderate like a beast"
@@ -14,7 +16,16 @@
         ],
         "persistent": false
   },
-
+ "content_scripts":[
+   {
+     "matches":[
+       "<all_urls>"
+     ],
+     "js": [
+       "js/test.js"
+     ]
+   }
+ ],
 
  "permissions": ["activeTab"]
 }
