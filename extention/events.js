@@ -5,6 +5,7 @@ document.getElementById("myCheckBox").addEventListener("change", function(){
 testFoo();
 })
 
+
 }, false);
 
 function testFoo(){
