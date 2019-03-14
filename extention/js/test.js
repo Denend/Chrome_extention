@@ -2,15 +2,23 @@ console.log("we are ready");
 console.log("we are ready");
 var currLocation = window.location.href;
 
+
+  if(currLocation.includes('tcs.jiyunhudong.com/worktable?tags=&page=1&title=&type=star')){
+	calculateErrValue('tcs.jiyunhudong.com/worktable?tags=&page=1&title=&type=star').then(function(res){
+  		console.log(res)
+  		sessionStorage.setItem('errValue', res);
+  	});
+  };
   document.onkeyup = function(e){
      if(e.keyCode==32){
   		setTimeout(function(){
 			calculateErrValue('tcs.jiyunhudong.com/worktable/6575057855890588173').then(function(res){
 				console.log(res)
 				let previousVal = sessionStorage.getItem('errValue');
-				if(res == previousVal){
+				if(res > previousVal){
 					alert("someone did a mistake")
-				}
+					sessionStorage.setItem('errValue', res);
+				}			
 			});
 		
 		},3000);
@@ -21,10 +29,10 @@ var currLocation = window.location.href;
 
 
 
-calculateErrValue('tcs.jiyunhudong.com/worktable?tags=&page=1&title=&type=star').then(function(res){
-console.log(res)
-sessionStorage.setItem('errValue', res);
-})
+
+
+
+
 
 
 
