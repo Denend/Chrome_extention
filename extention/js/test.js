@@ -17,7 +17,10 @@ var currLocation = window.location.href;
 				let previousVal = sessionStorage.getItem('errValue');
 				if(res > previousVal){
 					alert("someone did a mistake")
-					sessionStorage.setItem('errValue', res);
+					showMistakeInfo().then(function(res){
+						alert(res)
+					});
+					//sessionStorage.setItem('errValue', res);
 				}			
 			});
 		
@@ -48,12 +51,16 @@ function calculateErrValue(url){
 	function(res){
 		return res.json().then(
 			 function(res1){
+				let toVerifyStr = "to_verify";
+				
 				console.log(res1)
 				mistakesNum = res1.data;
 				let parsedObj = JSON.stringify(mistakesNum);
 				console.log(parsedObj)
 			
 				let position = fourthIndex(parsedObj,":")
+				//parsedObj.indexOf(toVerifyStr)+toVerifyStr.lenght+1
+				
 				console.log(position)
 				let errVal = parsedObj.slice(position +1,position+2);
 				return errVal
@@ -78,5 +85,15 @@ function fourthIndex(text, symbol) {
 
 function checkErrNumber(){
 		alert("lol")			
+}
+
+function showMistakeInfo(){
+	return fetch("https://tcs.jiyunhudong.com/api/v2/query_task/?status=5&audit_status=&should_verify_count=&page=1&call_back=&with_data=1&per_page=100&product_type=&project_ids=6575057855890588173", {"credentials":"include","headers":{"accept":"application/json, text/plain, */*","accept-language":"en-US,en;q=0.9","x-requested-with":"XMLHttpRequest","x-ts":"1552750777628"},"referrer":"https://tcs.jiyunhudong.com/project/6575057855890588173/globaltasks?status=5&audit_status=&should_verify_count=&page=1&call_back=","referrerPolicy":"no-referrer-when-downgrade","body":null,"method":"GET","mode":"cors"}).then(
+		function(res){
+			return res.json().then(function(res1){
+			console.log(res1.data.results[res1.data.results.length-1].verifiers)
+			//return res1.data.results[res1.data.results.length-1].verifiers
+			return res1.data.results[res1.data.results.length-1].object_data.video_url
+	})})
 }
 //<button data-v-458e6193="" type="button" class="action-bar-button ivu-btn ivu-btn-primary"><!----> <!----> <span>Submit</span></button>
