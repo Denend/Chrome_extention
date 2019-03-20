@@ -95,7 +95,7 @@ function showMistakeInfo(){
 			return res.json().then(function(res1){
 			console.log(res1.data.results[res1.data.results.length-1].verifiers)
 			//return res1.data.results[res1.data.results.length-1].verifiers
-			return res1.data.results[res1.data.results.length-1].object_data.video_url
+			return res1.data.results[res1.data.results.length-1].object_data.video.url
 	})})
 }
 //<button data-v-458e6193="" type="button" class="action-bar-button ivu-btn ivu-btn-primary"><!----> <!----> <span>Submit</span></button>
