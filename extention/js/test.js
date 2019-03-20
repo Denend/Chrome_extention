@@ -3,8 +3,8 @@ console.log("we are ready");
 var currLocation = window.location.href;
 
 
-  if(currLocation.includes('tcs.jiyunhudong.com/worktable?tags=&page=1&title=&type=star')){
-	calculateErrValue('tcs.jiyunhudong.com/worktable?tags=&page=1&title=&type=star').then(function(res){
+  if(currLocation.includes('tcs.jiyunhudong.com/worktable/old?tags=&page=1&title=&type=star')){
+	calculateErrValue('tcs.jiyunhudong.com/worktable/old?tags=&page=1&title=&type=star').then(function(res){
   		console.log(res)
   		sessionStorage.setItem('errValue', res);
   	});
@@ -51,20 +51,22 @@ function calculateErrValue(url){
 	function(res){
 		return res.json().then(
 			 function(res1){
-				let toVerifyStr = "to_verify";
 				
+				let searchedStr = "to_audit"
 				console.log(res1)
 				mistakesNum = res1.data;
 				let parsedObj = JSON.stringify(mistakesNum);
 				console.log(parsedObj)
-			
-				let position = fourthIndex(parsedObj,":")
+				console.log(parsedObj.indexOf("to_audit"))
+				let position1 = parsedObj.indexOf("to_audit") + searchedStr.length
+				//let position = fourthIndex(parsedObj,":")
 				//parsedObj.indexOf(toVerifyStr)+toVerifyStr.lenght+1
 				
-				console.log(position)
-				let errVal = parsedObj.slice(position +1,position+2);
-				return errVal
-				//console.log(errVal)				
+				//console.log(position)
+				//let errVal = parsedObj.slice(position +1,position+2);	
+				let errVal1 = parsedObj.slice(position1+2 ,position1+3);	
+				return errVal1
+							
 		})})
 	};
 };
