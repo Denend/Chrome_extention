@@ -93,9 +93,12 @@ function showMistakeInfo(){
 	return fetch("https://tcs.jiyunhudong.com/api/v2/query_task/?status=5&audit_status=&should_verify_count=&page=1&call_back=&with_data=1&per_page=100&product_type=&project_ids=6575057855890588173", {"credentials":"include","headers":{"accept":"application/json, text/plain, */*","accept-language":"en-US,en;q=0.9","x-requested-with":"XMLHttpRequest","x-ts":"1552750777628"},"referrer":"https://tcs.jiyunhudong.com/project/6575057855890588173/globaltasks?status=5&audit_status=&should_verify_count=&page=1&call_back=","referrerPolicy":"no-referrer-when-downgrade","body":null,"method":"GET","mode":"cors"}).then(
 		function(res){
 			return res.json().then(function(res1){
-			console.log(res1.data.results[res1.data.results.length-1].verifiers)
-			//return res1.data.results[res1.data.results.length-1].verifiers
-			return res1.data.results[res1.data.results.length-1].object_data.video.url
+			let lastCase = res1.data.results[res1.data.results.length-1]; 
+			let moder1 = lastCase.verifiers[0]; 
+			let moder2 = lastCase.verifiers[1]; 
+			let moder1_data = JSON.stringify(lastCase.task_verifies[0].verify_data.mainForm); 
+			let moder2_data = JSON.stringify(lastCase.task_verifies[1].verify_data.mainForm); 
+			console.log(moder1 +" did "+ moder1_data[0],moder1_data[1]+" and "+ moder2+" did "+moder2_data)
 	})})
 }
 //<button data-v-458e6193="" type="button" class="action-bar-button ivu-btn ivu-btn-primary"><!----> <!----> <span>Submit</span></button>
